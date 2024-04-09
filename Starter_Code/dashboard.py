@@ -36,18 +36,21 @@ def housing_units_per_year():
     plt.ylim(min_housing_units - std_housing_units, max_housing_units + std_housing_units)
     return fig
 
-def average_gross_rent():
+def average_gross_rent(selected_neighborhood):
     """Average Gross Rent in San Francisco Per Year."""
-    avg_gross_rent = sfo_data.groupby('year')['gross_rent'].mean()
+    filtered_data = sfo_data[sfo_data['neighborhood'] == selected_neighborhood]
+    avg_gross_rent = filtered_data.groupby('year')['gross_rent'].mean()
     avg_gross_rent_df = pd.DataFrame(avg_gross_rent).reset_index()
-    fig = px.line(avg_gross_rent_df, x='year', y='gross_rent', title='Average Gross Rent in San Francisco Per Year')
+    fig = px.line(avg_gross_rent_df, x='year', y='gross_rent', title=f'Average Gross Rent in {selected_neighborhood} Per Year')
     fig.update_layout(xaxis_title='Year', yaxis_title='Gross Rent')
     return fig
-def average_sales_price():
+
+def average_sales_price(selected_neighborhood):
     """Average Sales Price Per Year."""
-    avg_sale_price = sfo_data.groupby('year')['sale_price_sqr_foot'].mean()
+    filtered_data = sfo_data[sfo_data['neighborhood'] == selected_neighborhood]
+    avg_sale_price = filtered_data.groupby('year')['sale_price_sqr_foot'].mean()
     avg_sale_price_df = pd.DataFrame(avg_sale_price).reset_index()
-    fig = px.line(avg_sale_price_df, x='year', y='sale_price_sqr_foot', title='Average Sale Price Per Square Foot in San Francisco Per Year')
+    fig = px.line(avg_sale_price_df, x='year', y='sale_price_sqr_foot', title=f'Average Sale Price Per Square Foot in {selected_neighborhood} Per Year')
     fig.update_layout(xaxis_title='Year', yaxis_title='Avg. Sale Price per Square Foot')
     return fig
 
@@ -116,9 +119,12 @@ def sunburst():
 # Start Streamlit App
 st.pyplot(housing_units_per_year())
 
-st.plotly_chart(average_gross_rent())
-st.plotly_chart(average_sales_price())
+selected_neighborhood = st.selectbox('Select a Neighborhood:', sfo_data['neighborhood'].unique())
 
+st.plotly_chart(average_gross_rent(selected_neighborhood))
+st.plotly_chart(average_sales_price(selected_neighborhood))
+
+st.write('The following three charts show the average price for three selected neighborhoods: Bayview, Alamo Square and Central Richmond.')
 st.plotly_chart(average_price_by_neighborhood('Bayview'))
 st.plotly_chart(average_price_by_neighborhood("Alamo Square"))
 st.plotly_chart(average_price_by_neighborhood('Central Richmond'))
