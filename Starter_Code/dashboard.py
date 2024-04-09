@@ -12,17 +12,15 @@ neighborhood_coords = pd.read_csv('Data/neighborhoods_coordinates.csv')
 sfo_data = pd.read_csv('Data/sfo_neighborhoods_census_data.csv', index_col='year')
 
 '''
-## Streamlit Visualizations
+## San Francisco Housing Cost Analysis
 
-In this section, you will copy the code for each plot type from your analysis notebook and place it into separate functions that Streamlit can use to visualize the different visualizations.
-
-These functions will return the plot or figure for each visualization.
-
-Be sure to include any DataFrame transformation/manipulation code required along with the plotting code.
-
-Return a figure object from each function that can be used to build the dashboard.
-
-Note: Remove any `.show()` lines from the code. We want to return the plots instead of showing them. The Streamlit dashboard will then display the plots.
+To visualise the San Francisco Housing Cost data, I did the following:
+- copied (and checked) the plotting code for each visualization;
+- wrapped these plots in separate functions to be compatible with Streamlit;
+- included code to ensure that each function returns the plot object for dashboard integration;
+- removed .show() commands to prevent plots from appearing outside the dashboard context;
+- ensured that plots were displayed correctly within the Streamlit dashboard;
+- ran (and re-ran) the dashboard using the command `streamlit run 'dashboard.py'.
 '''
 
 # Define Visualization Functions
