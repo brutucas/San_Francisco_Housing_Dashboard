@@ -4,7 +4,7 @@
 
 
 ## Background
-
+ 
 My company has recently launched a Real Estate Investment division, and my supervisor needs  help developing a prototype dashboard for San Francisco investment opportunities. The dashboard I am going to build will use charts, maps, and visualizations to help customers decide if they want to invest in rental properties.
 
 1. I have already been provided data on rental properties in San Francisco that includes census data and geographical data.
